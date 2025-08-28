@@ -2,7 +2,7 @@ name: Build and Push Docker Compose Images
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ master ]
 
 jobs:
   build-and-push:
@@ -52,14 +52,14 @@ jobs:
           echo "Matching services to images by order..."
           i=1
           for service in $services; do
-            image_id=$(echo "$recent_images" | sed -n "${i}p" | awk '{print $1}')
+            image_id=$(echo "$recent_images" | sed -n "${iclass}p" | awk '{print $1}')
             echo "Tagging $service with image $image_id"
             
-            docker tag $image_id $USERNAME/class-restuarants-$service:$SHORT_SHA
-            docker tag $image_id $USERNAME/class-restuarants-$service:latest
+            docker tag $image_id $USERNAME/-restuarants-$service:$SHORT_SHA
+            docker tag $image_id $USERNAME/my-restuarant projects-$service:latest
             
-            docker push $USERNAME/class-restuarants-$service:$SHORT_SHA
-            docker push $USERNAME/class-restuarants-$service:latest
+            docker push $USERNAME/my-restuarant projects-$service:$SHORT_SHA
+            docker push $USERNAME/my-restuarant projects-$service:latest
             
             i=$((i+1))
           done
@@ -71,11 +71,11 @@ jobs:
             if [ -n "$image_id" ]; then
               echo "Tagging $service with image $image_id"
               
-              docker tag $image_id $USERNAME/class-restuarants-$service:$SHORT_SHA
-              docker tag $image_id $USERNAME/class-restuarants-$service:latest
+              docker tag $image_id $USERNAME/my-restuarant projects-$service:$SHORT_SHA
+              docker tag $image_id $USERNAME/my-restuarant projects-$service:latest
               
-              docker push $USERNAME/class-restuarants-$service:$SHORT_SHA
-              docker push $USERNAME/class-restuarants-$service:latest
+              docker push $USERNAME/my-restuarant projects-$service:$SHORT_SHA
+              docker push $USERNAME/my-restuarant projects-$service:latest
               
               i=$((i+1))
             fi
