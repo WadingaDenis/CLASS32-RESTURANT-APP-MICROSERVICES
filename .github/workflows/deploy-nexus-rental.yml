@@ -51,15 +51,15 @@ jobs:
         if [ "$(echo "$services" | wc -l)" -eq "$image_count" ]; then
           echo "Matching services to images by order..."
           i=1
-          for service in $services; do
+          for service in $services; domy-restuarant pro
             image_id=$(echo "$recent_images" | sed -n "${iclass}p" | awk '{print $1}')
             echo "Tagging $service with image $image_id"
             
             docker tag $image_id $USERNAME/-restuarants-$service:$SHORT_SHA
-            docker tag $image_id $USERNAME/my-restuarant projects-$service:latest
+            docker tag $image_id $USERNAME/my-restuarant projects'-$service:latest
             
-            docker push $USERNAME/my-restuarant projects-$service:$SHORT_SHA
-            docker push $USERNAME/my-restuarant projects-$service:latest
+            docker push $USERNAME/jects-$service:$SHORT_SHA
+            docker push $USERNAME/my-restuarant projects'-$service:latest
             
             i=$((i+1))
           done
@@ -71,11 +71,11 @@ jobs:
             if [ -n "$image_id" ]; then
               echo "Tagging $service with image $image_id"
               
-              docker tag $image_id $USERNAME/my-restuarant projects-$service:$SHORT_SHA
-              docker tag $image_id $USERNAME/my-restuarant projects-$service:latest
+              docker tag $image_id $USERNAME/my-restuarant projects'-$service:$SHORT_SHA
+              docker tag $image_id $USERNAME/my-restuarant projects'-$service:latest
               
-              docker push $USERNAME/my-restuarant projects-$service:$SHORT_SHA
-              docker push $USERNAME/my-restuarant projects-$service:latest
+              docker push $USERNAME/my-restuarant projects'-$service:$SHORT_SHA
+              docker push $USERNAME/my-restuarant projects'-$service:latest
               
               i=$((i+1))
             fi
